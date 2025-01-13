@@ -131,7 +131,7 @@
   (with-elfeed-web
     (let ((content (elfeed-deref (elfeed-ref--create :id ref))))
       (if content
-          (princ content)
+          (princ (concat "<html><head><meta charset=\"utf-8\"></head><body>" content "</body></html>"))
         (princ (json-encode '(:error 404)))
         (httpd-send-header t "application/json" 404)))))
 
