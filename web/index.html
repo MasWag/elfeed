@@ -57,6 +57,15 @@
                 {{selected.title}}
               </a>
             </h4>
+            <button class="button small" ng-click='markUnread(selected.webid)'>
+              Mark As Unread
+            </button>
+            <button class="button small" ng-click='markRead(selected.webid)'>
+              Mark As Read
+            </button>
+            <div ng-repeat="enclosure in selected.enclosures">
+              <audio controls src="{{enclosure}}"></audio>
+            </div>
             <iframe class="twelve columns panel"
                     sandbox src="/elfeed/content/{{selected.content}}">
             </iframe>

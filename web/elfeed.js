@@ -67,4 +67,14 @@ function SearchCtrl($scope, $http) {
         $http.get(URI('/elfeed/mark-all-read'));
         $scope.update();
     };
+
+    $scope.markRead = function(webid) {
+        $http.get(URI('/elfeed/mark-read/' + webid));
+        $scope.update();
+    };
+
+    $scope.markUnread = function(webid) {
+        $http.get(URI('/elfeed/mark-unread/' + webid));
+        $scope.update();
+    };
 }

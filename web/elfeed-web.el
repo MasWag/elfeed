@@ -170,6 +170,22 @@ advanced past it (long poll)."
       (elfeed-untag e 'unread))
     (princ (json-encode t))))
 
+(defservlet* elfeed/mark-read/:webid application/json ()
+  "Marks the given entry in the database as read."
+  (with-elfeed-web
+    (with-elfeed-db-visit (entry _)
+      (when (string= webid (elfeed-web-make-webid entry))
+        (elfeed-untag entry 'unread)))
+    (princ (json-encode t))))
+
+(defservlet* elfeed/mark-unread/:webid application/json ()
+  "Marks the given entry in the database as unread."
+  (with-elfeed-web
+    (with-elfeed-db-visit (entry _)
+      (when (string= webid (elfeed-web-make-webid entry))
+        (elfeed-tag entry 'unread)))
+    (princ (json-encode t))))
+
 (defservlet* elfeed/tags application/json ()
   "Endpoint for adding and removing tags on zero or more entries.
 Only PUT requests are accepted, and the content must be a JSON
